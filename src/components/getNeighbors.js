@@ -6,6 +6,7 @@ export default function getNeighbors(vertex) {
   const neighbors = [];
 
   const [x, y] = stringToArr(vertex);
+
   if (x - 1 >= 0 && y + 2 <= 7) {
     neighbors.push([x - 1, y + 2]);
   }

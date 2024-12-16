@@ -24,7 +24,7 @@ class Chessboard {
 
     const queue = [];
     const visited = {};
-    const parent = {};
+    const parentMap = {};
 
     visited[startNodeKey] = true;
     queue.push(startNodeKey);
@@ -32,13 +32,26 @@ class Chessboard {
     while (queue.length) {
       const node = queue.shift();
       const nodelist = this.adjacentList.get(node);
+
       if (node === endNodeKey) {
-        console.log(parent);
+        const path = [];
+        let curr = node;
+
+        path.unshift(node);
+        while (curr) {
+          path.unshift(parentMap[curr]);
+          curr = parentMap[curr];
+          if (curr === startNodeKey) {
+            console.log(path);
+            return path;
+          }
+        }
       }
+
       for (const nodeEl of nodelist) {
         if (!visited[nodeEl]) {
           visited[nodeEl] = true;
-          parent[nodeEl] = node;
+          parentMap[nodeEl] = node;
           queue.push(nodeEl);
         }
       }
@@ -60,4 +73,4 @@ for (const key of coordinateKeys) {
     board.addEdges(key, neighbor);
   }
 }
-board.knightMoves([0, 0], [7, 7]);
+board.knightMoves([0, 0], [3, 3]);
