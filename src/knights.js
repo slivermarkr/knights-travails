@@ -1,9 +1,4 @@
-import VERTICES from "./components/createVertices.js";
-import getNeighbors from "./components/getNeighbors.js";
-
-const DIMENSION = 8;
-
-class Chessboard {
+export default class Chessboard {
   constructor(vertices) {
     this.vertices = vertices;
     this.adjacentList = new Map();
@@ -58,19 +53,3 @@ class Chessboard {
     }
   }
 }
-
-const board = new Chessboard(DIMENSION * DIMENSION);
-const coordinateKeys = board.adjacentList.keys();
-
-for (let i = 0; i < VERTICES.length; i++) {
-  board.addVertex(VERTICES[i]);
-}
-
-for (const key of coordinateKeys) {
-  const neighbors = getNeighbors(key);
-
-  for (const neighbor of neighbors) {
-    board.addEdges(key, neighbor);
-  }
-}
-board.knightMoves([0, 0], [3, 3]);
