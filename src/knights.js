@@ -1,6 +1,5 @@
 import VERTICES from "./components/createVertices.js";
 import getNeighbors from "./components/getNeighbors.js";
-import stringToArr from "./components/stringToArr.js";
 
 const DIMENSION = 8;
 
@@ -9,21 +8,50 @@ class Chessboard {
     this.vertices = vertices;
     this.adjacentList = new Map();
   }
+
   addVertex(vertex) {
     this.adjacentList.set(vertex, new Set());
   }
+
   addEdges(vertV, vertU) {
     this.adjacentList.get(vertV).add(JSON.stringify(vertU));
     this.adjacentList.get(JSON.stringify(vertU)).add(vertV);
   }
+
+  knightMoves(start, end) {
+    const startNodeKey = JSON.stringify(start);
+    const endNodeKey = JSON.stringify(end);
+
+    const queue = [];
+    const visited = {};
+    const parent = {};
+
+    visited[startNodeKey] = true;
+    queue.push(startNodeKey);
+
+    while (queue.length) {
+      const node = queue.shift();
+      const nodelist = this.adjacentList.get(node);
+      if (node === endNodeKey) {
+        console.log(parent);
+      }
+      for (const nodeEl of nodelist) {
+        if (!visited[nodeEl]) {
+          visited[nodeEl] = true;
+          parent[nodeEl] = node;
+          queue.push(nodeEl);
+        }
+      }
+    }
+  }
 }
+
 const board = new Chessboard(DIMENSION * DIMENSION);
+const coordinateKeys = board.adjacentList.keys();
 
 for (let i = 0; i < VERTICES.length; i++) {
   board.addVertex(VERTICES[i]);
 }
-
-const coordinateKeys = board.adjacentList.keys();
 
 for (const key of coordinateKeys) {
   const neighbors = getNeighbors(key);
@@ -32,4 +60,4 @@ for (const key of coordinateKeys) {
     board.addEdges(key, neighbor);
   }
 }
-console.log(board.adjacentList);
+board.knightMoves([0, 0], [7, 7]);
