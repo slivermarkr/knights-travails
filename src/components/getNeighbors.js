@@ -1,4 +1,5 @@
 import stringToArr from "./stringToArr.js";
+
 export default function getNeighbors(vertex) {
   const neighbors = [];
   const [x, y] = stringToArr(vertex);
@@ -29,5 +30,3 @@ export default function getNeighbors(vertex) {
   }
   return neighbors;
 }
-
-console.log(getNeighbors("[7, 7]"));
