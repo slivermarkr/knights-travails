@@ -96,6 +96,8 @@ function reset() {
   container.textContent = "";
   // startEl.textContent = "";
   // endEl.textContent = "";
+  // message.textContent = "";
+  // result.textContent = "";
   start = false;
   end = false;
   renderBoard();
