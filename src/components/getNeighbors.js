@@ -1,35 +1,21 @@
 import stringToArr from "./stringToArr.js";
 
-// look at this horror masterpiece
-
 export default function getNeighbors(vertex) {
-  const neighbors = [];
-
   const [x, y] = stringToArr(vertex);
-
-  if (x - 1 >= 0 && y + 2 <= 7) {
-    neighbors.push([x - 1, y + 2]);
-  }
-  if (x - 1 >= 0 && y - 2 >= 0) {
-    neighbors.push([x - 1, y - 2]);
-  }
-  if (x + 1 <= 7 && y + 2 <= 7) {
-    neighbors.push([x + 1, y + 2]);
-  }
-  if (x + 1 <= 7 && y - 2 >= 0) {
-    neighbors.push([x + 1, y - 2]);
-  }
-  if (x - 2 >= 0 && y + 1 <= 7) {
-    neighbors.push([x - 2, y + 1]);
-  }
-  if (x - 2 >= 0 && y - 1 >= 0) {
-    neighbors.push([x - 2, y - 1]);
-  }
-  if (x + 2 <= 7 && y + 1 <= 7) {
-    neighbors.push([x + 2, y + 1]);
-  }
-  if (x + 2 <= 7 && y - 1 >= 0) {
-    neighbors.push([x + 2, y - 1]);
-  }
-  return neighbors;
+  const knightsPossibleMove = [
+    [1, 2],
+    [-1, -2],
+    [-1, 2],
+    [1, -2],
+    [2, 1],
+    [-2, -1],
+    [-2, 1],
+    [2, -1],
+  ];
+  return knightsPossibleMove
+    .map(([dx, dy]) => [x + dx, y + dy])
+    .filter(([nx, ny]) => nx <= 7 && nx >= 0 && ny <= 7 && ny >= 0)
+    .map((value) => value);
 }
+
+getNeighbors(JSON.stringify([0, 0]));

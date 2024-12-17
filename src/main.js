@@ -17,6 +17,7 @@ for (const key of coordinateKeys) {
     board.addEdges(key, neighbor);
   }
 }
+// console.log(board.adjacentList);
 board.knightMoves([0, 0], [7, 0]); // == [ '[0,0]', '[1,2]', '[2,4]', '[3,2]', '[5,1]', '[7,0]' ]
 board.knightMoves([5, 5], [7, 0]); // == [ '[5,5]', '[4,3]', '[5,1]', '[7,0]' ]
 board.knightMoves([0, 0], [3, 3]); // == [ '[0,0]', '[1,2]', '[3,3]' ]

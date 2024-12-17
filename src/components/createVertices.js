@@ -8,4 +8,3 @@ for (let i = 0; i < DIMENSION; i++) {
 }
 
 export default vertices;
-// console.log(vertices);

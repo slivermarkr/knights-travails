@@ -17,6 +17,13 @@ export default class Chessboard {
     const startNodeKey = JSON.stringify(start);
     const endNodeKey = JSON.stringify(end);
 
+    if (
+      !this.adjacentList.has(startNodeKey) ||
+      !this.adjacentList.has(endNodeKey)
+    ) {
+      throw new Error("Invalid start or end position");
+    }
+
     const queue = [];
     const visited = {};
     const parentMap = {};
