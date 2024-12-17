@@ -4,6 +4,8 @@ import stringToArr from "./components/stringToArr.js";
 const container = document.querySelector(".container");
 const btn = document.querySelector(".traverseBtn");
 const result = document.querySelector(".result");
+const moveCount = document.querySelector(".moveCount");
+const message = document.querySelector(".message");
 const DIMENSION = 8;
 
 let isOdd = true;
@@ -72,6 +74,14 @@ btn.addEventListener("click", () => {
     const e = stringToArr(endEl.textContent);
     console.log(s, e);
     result.textContent = board.knightMoves(s, e);
+    if (board.knightMoves(s, e).length <= 2) {
+      moveCount.textContent = 1;
+    } else {
+      moveCount.textContent = board.knightMoves(s, e).length;
+    }
+    message.style.display = "block";
+    // console.log(board.knightMoves(s, e).length);
+    reset();
   }
 });
 
