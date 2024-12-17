@@ -74,21 +74,21 @@ btn.addEventListener("click", () => {
     const e = stringToArr(endEl.textContent);
     console.log(s, e);
     result.textContent = board.knightMoves(s, e);
+
     if (board.knightMoves(s, e).length <= 2) {
       moveCount.textContent = 1;
     } else {
-      moveCount.textContent = board.knightMoves(s, e).length;
+      moveCount.textContent = board.knightMoves(s, e).length - 1;
     }
     message.style.display = "block";
-    // console.log(board.knightMoves(s, e).length);
     reset();
   }
 });
 
 function reset() {
   container.textContent = "";
-  startEl.textContent = "";
-  endEl.textContent = "";
+  // startEl.textContent = "";
+  // endEl.textContent = "";
   start = false;
   end = false;
   renderBoard();
