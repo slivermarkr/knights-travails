@@ -1,5 +1,9 @@
 body {
   background-color: blanchedalmond;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  /* align-items: center; */
 }
 .container {
   display: grid;
@@ -17,5 +21,25 @@ body {
 }
 
 .selected {
-  color: orange;
+  color: red;
+  font-size: 20px;
+}
+
+.start {
+  color: darkblue;
+}
+.end {
+  color: orangered;
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+}
+
+.info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.5rem;
 }

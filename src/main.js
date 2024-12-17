@@ -15,7 +15,8 @@ for (const key of board.adjacentList.keys()) {
     board.addEdges(key, neighbor);
   }
 }
-board.knightMoves([0, 0], [7, 0]); // == [ '[0,0]', '[1,2]', '[2,4]', '[3,2]', '[5,1]', '[7,0]' ]
-board.knightMoves([5, 5], [7, 0]); // == [ '[5,5]', '[4,3]', '[5,1]', '[7,0]' ]
-board.knightMoves([0, 0], [3, 3]); // == [ '[0,0]', '[1,2]', '[3,3]' ]
-board.knightMoves([3, 3], [0, 0]); // == [ '[3,3]', '[1,2]', '[0,0]' ]
+export default board;
+// board.knightMoves([0, 0], [7, 0]); // == [ '[0,0]', '[1,2]', '[2,4]', '[3,2]', '[5,1]', '[7,0]' ]
+// board.knightMoves([5, 5], [7, 0]); // == [ '[5,5]', '[4,3]', '[5,1]', '[7,0]' ]
+// board.knightMoves([0, 0], [3, 3]); // == [ '[0,0]', '[1,2]', '[3,3]' ]
+// board.knightMoves([3, 3], [0, 0]); // == [ '[3,3]', '[1,2]', '[0,0]' ]
