@@ -35,6 +35,10 @@ body {
 .box {
   width: 60px;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 
 .info {
@@ -51,4 +55,8 @@ body {
 }
 .message {
   display: none;
+}
+
+.info {
+  font-size: 1.3rem;
 }

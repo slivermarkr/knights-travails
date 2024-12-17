@@ -3,10 +3,12 @@ import stringToArr from "./components/stringToArr.js";
 
 const container = document.querySelector(".container");
 const btn = document.querySelector(".traverseBtn");
+const resetBtn = document.querySelector(".resetBtn");
 const result = document.querySelector(".result");
 const moveCount = document.querySelector(".moveCount");
 const message = document.querySelector(".message");
 const DIMENSION = 8;
+let myArr = undefined;
 
 let isOdd = true;
 function renderBoard() {
@@ -31,7 +33,7 @@ function renderBoard() {
           box.classList.add("dark");
         }
       }
-      box.setAttribute("data-index", `[${j}, ${i}]`);
+      box.setAttribute("data-index", `[${j},${i}]`);
       box.classList.add("box");
       container.append(box);
     }
@@ -70,18 +72,23 @@ container.addEventListener("click", (e) => {
 
 btn.addEventListener("click", () => {
   if (end) {
+    result.textContent = "";
     const s = stringToArr(startEl.textContent);
     const e = stringToArr(endEl.textContent);
-    console.log(s, e);
-    result.textContent = board.knightMoves(s, e);
-
-    if (board.knightMoves(s, e).length <= 2) {
+    myArr = board.knightMoves(s, e);
+    for (const i of myArr) {
+      const el = document.createElement("p");
+      el.textContent = i;
+      result.append(el);
+    }
+    if (myArr.length <= 2) {
       moveCount.textContent = 1;
     } else {
-      moveCount.textContent = board.knightMoves(s, e).length - 1;
+      moveCount.textContent = myArr.length - 1;
     }
     message.style.display = "block";
     reset();
+    pathHL(myArr);
   }
 });
 
@@ -93,3 +100,21 @@ function reset() {
   end = false;
   renderBoard();
 }
+
+function pathHL(paths) {
+  const els = paths.map((path) => {
+    const elements = document.querySelector(`.box[data-index="${path}"]`);
+    console.log(elements.dataset.index);
+    return elements;
+  });
+  console.log(els);
+  els.forEach((element) => {
+    element.textContent = element.dataset.index;
+    element.style.color = "red";
+  });
+}
+
+resetBtn.addEventListener("click", () => {
+  console.log("hello");
+  reset();
+});
