@@ -1,5 +1,4 @@
 import board from "./main.js";
-import stringToArr from "./components/stringToArr.js";
 
 const container = document.querySelector(".container");
 const btn = document.querySelector(".traverseBtn");
@@ -10,17 +9,17 @@ const message = document.querySelector(".message");
 const DIMENSION = 8;
 let myArr = undefined;
 
-let isOdd = true;
+let isEven = true;
 function renderBoard() {
   for (let i = DIMENSION - 1; i >= 0; i--) {
     if (i % 2 === 1) {
-      isOdd = false;
+      isEven = false;
     } else {
-      isOdd = true;
+      isEven = true;
     }
     for (let j = 0; j < DIMENSION; j++) {
       const box = document.createElement("div");
-      if (isOdd) {
+      if (isEven) {
         if (j % 2 === 1) {
           box.classList.add("dark");
         } else {
@@ -49,13 +48,10 @@ const endEl = document.querySelector(".end");
 
 container.addEventListener("click", (e) => {
   if (!e.target.classList.contains("box")) return;
-
-  if (start && end) {
-    console.log("reset");
+  if (myArr) {
+    return;
   }
-
   const box = e.target;
-  console.log(box.dataset.index);
   box.classList.add("selected");
   box.textContent = box.dataset.index;
 
@@ -92,10 +88,6 @@ btn.addEventListener("click", () => {
 
 function reset() {
   container.textContent = "";
-  // startEl.textContent = "";
-  // endEl.textContent = "";
-  // message.textContent = "";
-  // result.textContent = "";
   start = false;
   end = false;
   renderBoard();
@@ -104,10 +96,8 @@ function reset() {
 function pathHL(paths) {
   const els = paths.map((path) => {
     const elements = document.querySelector(`.box[data-index="${path}"]`);
-    console.log(elements.dataset.index);
     return elements;
   });
-  console.log(els);
   els.forEach((element) => {
     element.textContent = element.dataset.index;
     element.style.color = "red";
@@ -115,6 +105,8 @@ function pathHL(paths) {
 }
 
 resetBtn.addEventListener("click", () => {
-  console.log("hello");
+  result.textContent = "";
+  message.style.display = "none";
+  myArr = undefined;
   reset();
 });
