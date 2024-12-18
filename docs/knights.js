@@ -9,13 +9,13 @@ export default class Chessboard {
   }
 
   addEdges(vertV, vertU) {
-    this.adjacentList.get(vertV).add(JSON.stringify(vertU));
-    this.adjacentList.get(JSON.stringify(vertU)).add(vertV);
+    this.adjacentList.get(vertV).add(vertU);
+    this.adjacentList.get(vertU).add(vertV);
   }
 
   knightMoves(start, end) {
-    const startNodeKey = JSON.stringify(start);
-    const endNodeKey = JSON.stringify(end);
+    const startNodeKey = start;
+    const endNodeKey = end;
 
     if (
       !this.adjacentList.has(startNodeKey) ||
@@ -39,15 +39,11 @@ export default class Chessboard {
         const path = [];
         let curr = node;
 
-        path.unshift(node);
         while (curr) {
-          path.unshift(parentMap[curr]);
+          path.unshift(curr);
           curr = parentMap[curr];
-          if (curr === startNodeKey) {
-            console.log(path);
-            return path;
-          }
         }
+        return path;
       }
 
       for (const nodeEl of nodelist) {

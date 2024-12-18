@@ -73,9 +73,7 @@ container.addEventListener("click", (e) => {
 btn.addEventListener("click", () => {
   if (end) {
     result.textContent = "";
-    const s = stringToArr(startEl.textContent);
-    const e = stringToArr(endEl.textContent);
-    myArr = board.knightMoves(s, e);
+    myArr = board.knightMoves(startEl.textContent, endEl.textContent);
     for (const i of myArr) {
       const el = document.createElement("p");
       el.textContent = i;
