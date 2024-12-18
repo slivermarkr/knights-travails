@@ -108,5 +108,7 @@ resetBtn.addEventListener("click", () => {
   result.textContent = "";
   message.style.display = "none";
   myArr = undefined;
+  startEl.textContent = "[_,_]";
+  endEl.textContent = "[_,_]";
   reset();
 });
