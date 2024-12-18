@@ -41,29 +41,39 @@ function renderBoard() {
 
 renderBoard();
 
-let start = false;
-let end = false;
+let isWaiting = false;
+let start = undefined;
+let end = undefined;
 const startEl = document.querySelector(".start");
 const endEl = document.querySelector(".end");
 
 container.addEventListener("click", (e) => {
   if (!e.target.classList.contains("box")) return;
   if (myArr) {
+    result.textContent = "Resetting...";
+    setTimeout(anotherReset, 1000);
+    return;
+  }
+  if (start && end) {
+    result.textContent = "Resetting...";
+    setTimeout(anotherReset, 1000);
     return;
   }
   const box = e.target;
   box.classList.add("selected");
   box.textContent = box.dataset.index;
 
-  if (!start) {
-    startEl.textContent = box.dataset.index;
-    start = true;
-    end = false;
+  if (!isWaiting) {
+    isWaiting = true;
+    start = box.dataset.index;
+    startEl.textContent = start;
   } else {
-    endEl.textContent = box.dataset.index;
-    start = false;
-    end = true;
+    isWaiting = false;
+    end = box.dataset.index;
+    endEl.textContent = end;
   }
+  startEl.textContent = start;
+  endEl.textContent = end;
 });
 
 btn.addEventListener("click", () => {
@@ -88,7 +98,7 @@ btn.addEventListener("click", () => {
 
 function reset() {
   container.textContent = "";
-  start = false;
+  isWaiting = false;
   end = false;
   renderBoard();
 }
@@ -105,10 +115,16 @@ function pathHL(paths) {
 }
 
 resetBtn.addEventListener("click", () => {
+  anotherReset();
+});
+
+function anotherReset() {
   result.textContent = "";
   message.style.display = "none";
   myArr = undefined;
   startEl.textContent = "[_,_]";
   endEl.textContent = "[_,_]";
+  end = undefined;
+  start = undefined;
   reset();
-});
+}
